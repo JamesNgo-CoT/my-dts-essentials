@@ -2,8 +2,8 @@
 
 /* global _ Backbone */
 
-/* exported LoginModelView */
-var LoginModelView = Backbone.View.extend({
+/* exported LoginView */
+var LoginView = Backbone.View.extend({
   cotLogin: null,
 
   doLogin: function doLogin() {

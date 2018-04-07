@@ -47,7 +47,16 @@ var ODataCollectionDataTablePageView = ODataCollectionDataTableView.extend({
   render: function render() {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
+    if (options.columns) {
+      if (this.columns != options.columns) {
+        this.columns = options.columns;
+      }
+    } else {
+      options.columns = this.columns;
+    }
+
     options.datatable = ODataCollectionDataTableView.prototype.template.call(this, options);
+
     return ODataCollectionDataTableView.prototype.render.call(this, options);
   },
 
