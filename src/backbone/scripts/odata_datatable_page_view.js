@@ -1,7 +1,7 @@
-/* global _ ODataCollectionDataTableView */
+/* global _ ODataDataTableView */
 
-/* exported ODataCollectionDataTablePageView */
-const ODataCollectionDataTablePageView = ODataCollectionDataTableView.extend({
+/* exported ODataDataTablePageView */
+const ODataDataTablePageView = ODataDataTableView.extend({
   doButtonCopy: function(e) {
     e.preventDefault();
     this.buttonCopy();
