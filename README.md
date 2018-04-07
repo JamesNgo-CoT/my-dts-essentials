@@ -1,3 +1,3 @@
-# my-dts-workspace
+# my-dts-essentials
 
 Description...
