@@ -1,0 +1,17 @@
+#app-header div.row > div {
+  float: left;
+  padding-left: 15px;
+  padding-right: 15px; }
+  #app-header div.row > div.securesite {
+    float: right; }
+    #app-header div.row > div.securesite form {
+      display: inline-block; }
+    #app-header div.row > div.securesite img {
+      height: 30px;
+      width: 30px; }
+
+#maincontent .btn-group button {
+  margin: 0; }
+
+#maincontent button {
+  margin: 0; }

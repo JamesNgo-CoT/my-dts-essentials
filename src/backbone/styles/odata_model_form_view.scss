@@ -1,0 +1,36 @@
+#maincontent {
+  .cot-form {
+    margin-top: 10px;
+
+    form {
+      .panel {
+        margin-bottom: 10px;
+
+        .panel-body {
+          background-color: transparent;
+
+          .form-group {
+            margin-bottom: 10px;
+          }
+
+          .grid-object {
+            padding-bottom: 0;
+            padding-top: 0;
+
+            &.noTitle .grid-title {
+              display: none;
+            }
+
+            table.grid-table {
+              margin: 0 0 10px 0;
+
+              td {
+                background-color: transparent;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

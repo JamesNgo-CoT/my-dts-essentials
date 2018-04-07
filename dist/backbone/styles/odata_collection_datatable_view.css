@@ -1,0 +1,24 @@
+#maincontent .dataTables_wrapper {
+  margin: 10px 0; }
+  #maincontent .dataTables_wrapper .dataTables_length select {
+    line-height: 1.5em; }
+  #maincontent .dataTables_wrapper .dt-buttons {
+    display: none; }
+  #maincontent .dataTables_wrapper .table-responsive {
+    margin: 0; }
+    #maincontent .dataTables_wrapper .table-responsive table {
+      margin: 5px 0; }
+      #maincontent .dataTables_wrapper .table-responsive table .link {
+        width: 60px; }
+        #maincontent .dataTables_wrapper .table-responsive table .link .btn {
+          margin: -5px 0; }
+      #maincontent .dataTables_wrapper .table-responsive table td.number {
+        text-align: right; }
+  #maincontent .dataTables_wrapper div.dataTables_info {
+    margin-top: 5px;
+    padding: 7px 0; }
+  #maincontent .dataTables_wrapper div.dataTables_paginate {
+    margin-top: 5px; }
+    #maincontent .dataTables_wrapper div.dataTables_paginate ul.pagination {
+      float: right;
+      padding: 0; }

@@ -1,0 +1,1 @@
+{"version":3,"sources":["odata_model_report_view.min.css"],"names":[],"mappings":"AAAA,YACE,eAAiB,CAAE,AAGjB,yCACE,kBAAoB,CAAE","file":"odata_model_report_view.min.css","sourcesContent":[".cot-report {\n  margin-top: 10px; }\n  .cot-report .panel {\n    margin-bottom: 10px; }\n    .cot-report .panel dl {\n      margin-bottom: 10px; }\n"]}

@@ -1,22 +1,24 @@
 {
-  "name": "my-dts-workspace",
+  "name": "my-dts-essentials",
+  "description": "Description...",
   "version": "1.0.0",
-  "description": "My DTS Workspace",
-  "main": "index.js",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JamesNgo-CoT/my-dts-workspace.git"
+    "url": "git+https://github.com/JamesNgo-CoT/my-dts-essentials.git"
   },
-  "keywords": [],
-  "author": "James Ngo",
-  "license": "UNLICENSED",
+  "author": "",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JamesNgo-CoT/my-dts-workspace/issues"
+    "url": "https://github.com/JamesNgo-CoT/my-dts-essentials/issues"
   },
-  "homepage": "https://github.com/JamesNgo-CoT/my-dts-workspace#readme",
+  "homepage": "https://github.com/JamesNgo-CoT/my-dts-essentials#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
