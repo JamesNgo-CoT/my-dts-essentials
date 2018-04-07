@@ -2,8 +2,8 @@
 
 /* global _ Backbone */
 
-/* exported ODataModelReportView */
-var ODataModelReportView = Backbone.View.extend({
+/* exported ODataReportView */
+var ODataReportView = Backbone.View.extend({
   render: function render() {
     this.$el.html(this.template({ model: this.model.toJSON() }));
     return Promise.resolve();

@@ -32,7 +32,7 @@ const ODataDataTablePageView = ODataDataTableView.extend({
     this.reload(null, true);
   },
 
-  events: $.extend({}, ODataCollectionDataTableView.prototype.events, {
+  events: $.extend({}, ODataDataTableView.prototype.events, {
     'click .btn-reload': 'doReload',
 
     'click .button-copy': 'doButtonCopy',
@@ -51,9 +51,9 @@ const ODataDataTablePageView = ODataDataTableView.extend({
       options.columns = this.columns;
     }
 
-    options.datatable = ODataCollectionDataTableView.prototype.template.call(this, options);
+    options.datatable = ODataDataTableView.prototype.template.call(this, options);
 
-    return ODataCollectionDataTableView.prototype.render.call(this, options);
+    return ODataDataTableView.prototype.render.call(this, options);
   },
 
   template: _.template(`

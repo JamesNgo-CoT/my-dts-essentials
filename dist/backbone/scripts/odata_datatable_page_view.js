@@ -1,9 +1,9 @@
 'use strict';
 
-/* global _ ODataCollectionDataTableView */
+/* global _ ODataDataTableView */
 
-/* exported ODataCollectionDataTablePageView */
-var ODataCollectionDataTablePageView = ODataCollectionDataTableView.extend({
+/* exported ODataDataTablePageView */
+var ODataDataTablePageView = ODataDataTableView.extend({
   doButtonCopy: function doButtonCopy(e) {
     e.preventDefault();
     this.buttonCopy();
@@ -34,7 +34,7 @@ var ODataCollectionDataTablePageView = ODataCollectionDataTableView.extend({
     this.reload(null, true);
   },
 
-  events: $.extend({}, ODataCollectionDataTableView.prototype.events, {
+  events: $.extend({}, ODataDataTableView.prototype.events, {
     'click .btn-reload': 'doReload',
 
     'click .button-copy': 'doButtonCopy',
@@ -55,9 +55,9 @@ var ODataCollectionDataTablePageView = ODataCollectionDataTableView.extend({
       options.columns = this.columns;
     }
 
-    options.datatable = ODataCollectionDataTableView.prototype.template.call(this, options);
+    options.datatable = ODataDataTableView.prototype.template.call(this, options);
 
-    return ODataCollectionDataTableView.prototype.render.call(this, options);
+    return ODataDataTableView.prototype.render.call(this, options);
   },
 
   template: _.template('\n    <div>\n      <button type="button" class="btn btn-default btn-reload">Reload Data</button>\n      <div class="btn-group pull-right">\n        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\n          Actions <span class="caret"></span>\n        </button>\n        <ul class="dropdown-menu">\n          <li><a href="#" class="button-copy">Copy</a></li>\n          <li><a href="#" class="button-csv">CSV</a></li>\n          <li><a href="#" class="button-excel">Excel</a></li>\n          <li><a href="#" class="button-pdf">PDF</a></li>\n          <li><a href="#" class="button-print">Print</a></li>\n        </ul>\n      </div>\n    </div>\n\n    <%= datatable %>\n\n    <div>\n      <button type="button" class="btn btn-default btn-reload">Reload Data</button>\n      <div class="btn-group pull-right">\n        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\n          Actions <span class="caret"></span>\n        </button>\n        <ul class="dropdown-menu">\n          <li><a href="#" class="button-copy">Copy</a></li>\n          <li><a href="#" class="button-csv">CSV</a></li>\n          <li><a href="#" class="button-excel">Excel</a></li>\n          <li><a href="#" class="button-pdf">PDF</a></li>\n          <li><a href="#" class="button-print">Print</a></li>\n        </ul>\n      </div>\n    </div>\n  ')

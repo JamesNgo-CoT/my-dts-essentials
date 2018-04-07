@@ -2,8 +2,8 @@
 
 /* global _ Backbone CotForm */
 
-/* exported ODataModelFormView */
-var ODataModelFormView = Backbone.View.extend({
+/* exported ODataFormView */
+var ODataFormView = Backbone.View.extend({
   doCancel: function doCancel(e) {
     if (!confirm('Any changes made will not be saved. Do you want to continue?')) {
       e.preventDefault();

@@ -2,8 +2,8 @@
 
 /* global _ Backbone moment */
 
-/* exported ODataCollectionDataTableView */
-var ODataCollectionDataTableView = Backbone.View.extend({
+/* exported ODataDataTableView */
+var ODataDataTableView = Backbone.View.extend({
   buttonCopy: function buttonCopy() {
     this.$el.find('.buttons-copy').click();
   },
