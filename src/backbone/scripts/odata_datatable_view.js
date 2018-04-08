@@ -67,11 +67,9 @@ const ODataDataTableView = Backbone.View.extend({
 
   render: function(options = {}) {
     if (options.columns) {
-      if (this.columns != options.columns) {
-        this.columns = options.columns;
-      }
+      this.columns = _.result(options, 'columns');
     } else {
-      options.columns = this.columns;
+      options.columns = _.result('this', 'columns');
     }
 
     options.collection = this.collection.toJSON();
