@@ -150,7 +150,7 @@ var ODataDataTableView = Backbone.View.extend({
     return Promise.resolve();
   },
 
-  template: _.template('\n    <table class="table table-bordered table-striped">\n      <thead>\n        <tr>\n        <% for (var i = 0, l = view.columns.length; i < l; i++) { %>\n          <th><%= view.columns[i].title || view.columns[i].data %></th>\n        <% } %>\n        </tr>\n      </thead>\n      <tfoot>\n        <tr>\n        <% for (var i = 0, l = view.columns.length; i < l; i++) { %>\n          <td data-index="<%= i %>">\n          <% if (_.result(view.columns[i], \'searchHtml\')) { %>\n            <%= _.result(view.columns[i], \'searchHtml\') %>\n          <% } %>\n          </td>\n        <% } %>\n        </tr>\n      </tfoot>\n    </table>\n  ')
+  template: _.template('\n    <table class="table table-bordered table-striped">\n      <thead>\n        <tr>\n        <% for (var i = 0, l = columns.length; i < l; i++) { %>\n          <th><%= columns[i].title || columns[i].data %></th>\n        <% } %>\n        </tr>\n      </thead>\n      <tfoot>\n        <tr>\n        <% for (var i = 0, l = columns.length; i < l; i++) { %>\n          <td data-index="<%= i %>">\n          <% if (_.result(columns[i], \'searchHtml\')) { %>\n            <%= _.result(columns[i], \'searchHtml\') %>\n          <% } %>\n          </td>\n        <% } %>\n        </tr>\n      </tfoot>\n    </table>\n  ')
 }, {
   columnSearchMap: {
     dateEquals: function dateEquals(value, dataTableColumn, index) {
