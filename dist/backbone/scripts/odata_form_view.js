@@ -38,6 +38,8 @@ var ODataFormView = Backbone.View.extend({
 
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
+    console.log('ODATA FORM VIEW RENDER');
+
     this.$el.html(this.template({ model: this.model.toJSON() }));
 
     var form = new CotForm({
