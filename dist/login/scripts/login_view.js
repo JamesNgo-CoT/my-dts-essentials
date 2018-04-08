@@ -29,11 +29,11 @@ var LoginView = Backbone.View.extend({
   },
 
   render: function render() {
-    this.$el.html(this.template({ model: this.model }));
+    this.$el.html(this.template({ model: this.model.toJSON() }));
     return Promise.resolve();
   },
 
   tagName: 'form',
 
-  template: _.template('\n    <span class="visible-print-inline">Logged in as</span>\n    <%= model.lastName ? model.lastName : \'\' %><%= model.lastName && model.firstName  ? \',\' : \'\' %>\n    <%= model.firstName ? model.firstName : \'\' %>\n    <% if (model.sid) { %>\n    <button type="button" class="btn btn-primary btn-logout">Logout</button>\n    <% } else { %>\n    <button type="button" class="btn btn-default btn-login">Login</button>\n    <% } %>\n  ')
+  template: _.template('\n    <span class="visible-print-inline">Logged in as</span>\n    <%= model.lastName || \'\' %><%= model.lastName && model.firstName  ? \',\' : \'\' %>\n    <%= model.firstName || \'\' %>\n    <% if (model.sid) { %>\n    <button type="button" class="btn btn-primary btn-logout">Logout</button>\n    <% } else { %>\n    <button type="button" class="btn btn-default btn-login">Login</button>\n    <% } %>\n  ')
 });

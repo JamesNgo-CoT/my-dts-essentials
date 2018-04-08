@@ -80,6 +80,8 @@ var ODataDataTableView = Backbone.View.extend({
       options.columns = this.columns;
     }
 
+    options.collection = this.collection.toJSON();
+
     if (this.dataTable) {
       this.dataTable.destroy();
     }
