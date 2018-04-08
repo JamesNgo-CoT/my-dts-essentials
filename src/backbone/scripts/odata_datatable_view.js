@@ -141,17 +141,17 @@ const ODataDataTableView = Backbone.View.extend({
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
-        <% for (var i = 0, l = view.columns.length; i < l; i++) { %>
-          <th><%= view.columns[i].title || view.columns[i].data %></th>
+        <% for (var i = 0, l = columns.length; i < l; i++) { %>
+          <th><%= columns[i].title || columns[i].data %></th>
         <% } %>
         </tr>
       </thead>
       <tfoot>
         <tr>
-        <% for (var i = 0, l = view.columns.length; i < l; i++) { %>
+        <% for (var i = 0, l = columns.length; i < l; i++) { %>
           <td data-index="<%= i %>">
-          <% if (_.result(view.columns[i], 'searchHtml')) { %>
-            <%= _.result(view.columns[i], 'searchHtml') %>
+          <% if (_.result(columns[i], 'searchHtml')) { %>
+            <%= _.result(columns[i], 'searchHtml') %>
           <% } %>
           </td>
         <% } %>
