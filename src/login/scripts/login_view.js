@@ -36,9 +36,9 @@ const LoginView = Backbone.View.extend({
     <%= model.lastName ? model.lastName : '' %><%= model.lastName && model.firstName  ? ',' : '' %>
     <%= model.firstName ? model.firstName : '' %>
     <% if (model.sid) { %>
-    <button type="button" class="btn btn-default btn-logout">Logout</button>
+    <button type="button" class="btn btn-primary btn-logout">Logout</button>
     <% } else { %>
-    <button type="button" class="btn btn-primary btn-login">Login</button>
+    <button type="button" class="btn btn-default btn-login">Login</button>
     <% } %>
   `)
 });
