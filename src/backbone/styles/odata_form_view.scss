@@ -14,6 +14,18 @@
 
             dl {
               margin-bottom: 0;
+
+              dt {
+                margin-bottom: 5px;
+              }
+
+              dd {
+                background-color: #eee;
+                border-radius: 4px;
+                color: #333;
+                font-size: 14px;
+                padding: 7px 13px;
+              }
             }
           }
 
