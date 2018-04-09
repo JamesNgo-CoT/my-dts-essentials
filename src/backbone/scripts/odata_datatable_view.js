@@ -2,27 +2,35 @@
 
 /* exported ODataDataTableView */
 const ODataDataTableView = Backbone.View.extend({
-  buttonCopy: function() {
-    this.$el.find('.buttons-copy').click();
-  },
 
-  buttonCsv: function() {
-    this.$el.find('.buttons-csv').click();
-  },
-
-  buttonExcel: function() {
-    this.$el.find('.buttons-excel').click();
-  },
-
-  buttonPdf: function() {
-    this.$el.find('.buttons-pdf').click();
-  },
-
-  buttonPrint: function() {
-    this.$el.find('.buttons-print').click();
-  },
+  // PROPERTY DEFINITION
 
   columns: null,
+
+  template: _.template(`
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+        <% for (var i = 0, l = columns.length; i < l; i++) { %>
+          <th><%= columns[i].title || columns[i].data %></th>
+        <% } %>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+        <% for (var i = 0, l = columns.length; i < l; i++) { %>
+          <td data-index="<%= i %>">
+          <% if (_.result(columns[i], 'searchHtml')) { %>
+            <%= _.result(columns[i], 'searchHtml') %>
+          <% } %>
+          </td>
+        <% } %>
+        </tr>
+      </tfoot>
+    </table>
+  `),
+
+  // EVENT HANDLER DEFINITION
 
   doColumnSearch: function(e) {
     e.preventDefault();
@@ -49,6 +57,28 @@ const ODataDataTableView = Backbone.View.extend({
   events: {
     'change tfoot :input': 'doColumnSearch',
     'keyup tfoot :input': 'doColumnSearch',
+  },
+
+  // METHOD DEFINITION
+
+  buttonCopy: function() {
+    this.$el.find('.buttons-copy').click();
+  },
+
+  buttonCsv: function() {
+    this.$el.find('.buttons-csv').click();
+  },
+
+  buttonExcel: function() {
+    this.$el.find('.buttons-excel').click();
+  },
+
+  buttonPdf: function() {
+    this.$el.find('.buttons-pdf').click();
+  },
+
+  buttonPrint: function() {
+    this.$el.find('.buttons-print').click();
   },
 
   reload: function(callback, resetPaging) {
@@ -135,30 +165,7 @@ const ODataDataTableView = Backbone.View.extend({
     });
 
     return Promise.resolve();
-  },
-
-  template: _.template(`
-    <table class="table table-bordered table-striped">
-      <thead>
-        <tr>
-        <% for (var i = 0, l = columns.length; i < l; i++) { %>
-          <th><%= columns[i].title || columns[i].data %></th>
-        <% } %>
-        </tr>
-      </thead>
-      <tfoot>
-        <tr>
-        <% for (var i = 0, l = columns.length; i < l; i++) { %>
-          <td data-index="<%= i %>">
-          <% if (_.result(columns[i], 'searchHtml')) { %>
-            <%= _.result(columns[i], 'searchHtml') %>
-          <% } %>
-          </td>
-        <% } %>
-        </tr>
-      </tfoot>
-    </table>
-  `)
+  }
 }, {
   columnSearchMap: {
     dateEquals: (value, dataTableColumn, index) => {

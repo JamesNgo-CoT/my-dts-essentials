@@ -4,27 +4,14 @@
 
 /* exported ODataDataTableView */
 var ODataDataTableView = Backbone.View.extend({
-  buttonCopy: function buttonCopy() {
-    this.$el.find('.buttons-copy').click();
-  },
 
-  buttonCsv: function buttonCsv() {
-    this.$el.find('.buttons-csv').click();
-  },
-
-  buttonExcel: function buttonExcel() {
-    this.$el.find('.buttons-excel').click();
-  },
-
-  buttonPdf: function buttonPdf() {
-    this.$el.find('.buttons-pdf').click();
-  },
-
-  buttonPrint: function buttonPrint() {
-    this.$el.find('.buttons-print').click();
-  },
+  // PROPERTY DEFINITION
 
   columns: null,
+
+  template: _.template('\n    <table class="table table-bordered table-striped">\n      <thead>\n        <tr>\n        <% for (var i = 0, l = columns.length; i < l; i++) { %>\n          <th><%= columns[i].title || columns[i].data %></th>\n        <% } %>\n        </tr>\n      </thead>\n      <tfoot>\n        <tr>\n        <% for (var i = 0, l = columns.length; i < l; i++) { %>\n          <td data-index="<%= i %>">\n          <% if (_.result(columns[i], \'searchHtml\')) { %>\n            <%= _.result(columns[i], \'searchHtml\') %>\n          <% } %>\n          </td>\n        <% } %>\n        </tr>\n      </tfoot>\n    </table>\n  '),
+
+  // EVENT HANDLER DEFINITION
 
   doColumnSearch: function doColumnSearch(e) {
     e.preventDefault();
@@ -51,6 +38,28 @@ var ODataDataTableView = Backbone.View.extend({
   events: {
     'change tfoot :input': 'doColumnSearch',
     'keyup tfoot :input': 'doColumnSearch'
+  },
+
+  // METHOD DEFINITION
+
+  buttonCopy: function buttonCopy() {
+    this.$el.find('.buttons-copy').click();
+  },
+
+  buttonCsv: function buttonCsv() {
+    this.$el.find('.buttons-csv').click();
+  },
+
+  buttonExcel: function buttonExcel() {
+    this.$el.find('.buttons-excel').click();
+  },
+
+  buttonPdf: function buttonPdf() {
+    this.$el.find('.buttons-pdf').click();
+  },
+
+  buttonPrint: function buttonPrint() {
+    this.$el.find('.buttons-print').click();
   },
 
   reload: function reload(callback, resetPaging) {
@@ -148,9 +157,7 @@ var ODataDataTableView = Backbone.View.extend({
     });
 
     return Promise.resolve();
-  },
-
-  template: _.template('\n    <table class="table table-bordered table-striped">\n      <thead>\n        <tr>\n        <% for (var i = 0, l = columns.length; i < l; i++) { %>\n          <th><%= columns[i].title || columns[i].data %></th>\n        <% } %>\n        </tr>\n      </thead>\n      <tfoot>\n        <tr>\n        <% for (var i = 0, l = columns.length; i < l; i++) { %>\n          <td data-index="<%= i %>">\n          <% if (_.result(columns[i], \'searchHtml\')) { %>\n            <%= _.result(columns[i], \'searchHtml\') %>\n          <% } %>\n          </td>\n        <% } %>\n        </tr>\n      </tfoot>\n    </table>\n  ')
+  }
 }, {
   columnSearchMap: {
     dateEquals: function dateEquals(value, dataTableColumn, index) {
