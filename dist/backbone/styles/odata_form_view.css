@@ -6,17 +6,6 @@
       background-color: transparent; }
       #maincontent .cot-form form .panel .panel-body .form-group {
         margin-bottom: 10px; }
-        #maincontent .cot-form form .panel .panel-body .form-group dl {
-          margin-bottom: 0; }
-          #maincontent .cot-form form .panel .panel-body .form-group dl dt {
-            margin-bottom: 5px; }
-          #maincontent .cot-form form .panel .panel-body .form-group dl dd {
-            background-color: #eee;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            color: #333;
-            font-size: 14px;
-            padding: 6px 11px; }
       #maincontent .cot-form form .panel .panel-body .grid-object {
         padding-bottom: 0;
         padding-top: 0; }
