@@ -2,6 +2,47 @@
 
 /* exported ODataDataTablePageView */
 const ODataDataTablePageView = ODataDataTableView.extend({
+
+  // PROPERTY DEFINITION
+
+  template: _.template(`
+    <div>
+      <button type="button" class="btn btn-default btn-reload">Reload Data</button>
+      <div class="btn-group pull-right">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Actions <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="#" class="button-copy">Copy</a></li>
+          <li><a href="#" class="button-csv">CSV</a></li>
+          <li><a href="#" class="button-excel">Excel</a></li>
+          <li><a href="#" class="button-pdf">PDF</a></li>
+          <li><a href="#" class="button-print">Print</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <%= datatable %>
+
+    <div>
+      <button type="button" class="btn btn-default btn-reload">Reload Data</button>
+      <div class="btn-group pull-right">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Actions <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="#" class="button-copy">Copy</a></li>
+          <li><a href="#" class="button-csv">CSV</a></li>
+          <li><a href="#" class="button-excel">Excel</a></li>
+          <li><a href="#" class="button-pdf">PDF</a></li>
+          <li><a href="#" class="button-print">Print</a></li>
+        </ul>
+      </div>
+    </div>
+  `),
+
+  // EVENT HANDLER DEFINITION
+
   doButtonCopy: function(e) {
     e.preventDefault();
     this.buttonCopy();
@@ -42,53 +83,11 @@ const ODataDataTablePageView = ODataDataTableView.extend({
     'click .button-print': 'doButtonPrint'
   }),
 
+  // METHOD DEFINITION
+
   render: function(options = {}) {
-    if (options.columns) {
-      if (this.columns != options.columns) {
-        this.columns = options.columns;
-      }
-    } else {
-      options.columns = this.columns;
-    }
-
+    console.log('ODATA DATATABLE PAGE VIEW RENDER', options);
     options.datatable = ODataDataTableView.prototype.template.call(this, options);
-
     return ODataDataTableView.prototype.render.call(this, options);
-  },
-
-  template: _.template(`
-    <div>
-      <button type="button" class="btn btn-default btn-reload">Reload Data</button>
-      <div class="btn-group pull-right">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Actions <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="#" class="button-copy">Copy</a></li>
-          <li><a href="#" class="button-csv">CSV</a></li>
-          <li><a href="#" class="button-excel">Excel</a></li>
-          <li><a href="#" class="button-pdf">PDF</a></li>
-          <li><a href="#" class="button-print">Print</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <%= datatable %>
-
-    <div>
-      <button type="button" class="btn btn-default btn-reload">Reload Data</button>
-      <div class="btn-group pull-right">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Actions <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="#" class="button-copy">Copy</a></li>
-          <li><a href="#" class="button-csv">CSV</a></li>
-          <li><a href="#" class="button-excel">Excel</a></li>
-          <li><a href="#" class="button-pdf">PDF</a></li>
-          <li><a href="#" class="button-print">Print</a></li>
-        </ul>
-      </div>
-    </div>
-  `)
+  }
 });
