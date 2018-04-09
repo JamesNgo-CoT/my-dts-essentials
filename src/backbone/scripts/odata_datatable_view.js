@@ -99,7 +99,7 @@ const ODataDataTableView = Backbone.View.extend({
     if (options.columns) {
       this.columns = _.result(options, 'columns');
     } else {
-      options.columns = _.result('this', 'columns');
+      options.columns = _.result(this, 'columns');
     }
 
     options.collection = this.collection.toJSON();

@@ -86,7 +86,6 @@ const ODataDataTablePageView = ODataDataTableView.extend({
   // METHOD DEFINITION
 
   render: function(options = {}) {
-    console.log('ODATA DATATABLE PAGE VIEW RENDER', options);
     options.datatable = ODataDataTableView.prototype.template.call(this, options);
     return ODataDataTableView.prototype.render.call(this, options);
   }

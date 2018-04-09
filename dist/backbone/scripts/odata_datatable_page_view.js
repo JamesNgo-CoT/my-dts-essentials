@@ -56,7 +56,6 @@ var ODataDataTablePageView = ODataDataTableView.extend({
   render: function render() {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    console.log('ODATA DATATABLE PAGE VIEW RENDER', options);
     options.datatable = ODataDataTableView.prototype.template.call(this, options);
     return ODataDataTableView.prototype.render.call(this, options);
   }
