@@ -7,6 +7,8 @@ var ODataDataTablePageView = ODataDataTableView.extend({
 
   // PROPERTY DEFINITION
 
+  columns: null,
+
   template: _.template('\n    <div>\n      <button type="button" class="btn btn-default btn-reload">Reload Data</button>\n      <div class="btn-group pull-right">\n        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\n          Actions <span class="caret"></span>\n        </button>\n        <ul class="dropdown-menu">\n          <li><a href="#" class="button-copy">Copy</a></li>\n          <li><a href="#" class="button-csv">CSV</a></li>\n          <li><a href="#" class="button-excel">Excel</a></li>\n          <li><a href="#" class="button-pdf">PDF</a></li>\n          <li><a href="#" class="button-print">Print</a></li>\n        </ul>\n      </div>\n    </div>\n\n    <%= datatable %>\n\n    <div>\n      <button type="button" class="btn btn-default btn-reload">Reload Data</button>\n      <div class="btn-group pull-right">\n        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\n          Actions <span class="caret"></span>\n        </button>\n        <ul class="dropdown-menu">\n          <li><a href="#" class="button-copy">Copy</a></li>\n          <li><a href="#" class="button-csv">CSV</a></li>\n          <li><a href="#" class="button-excel">Excel</a></li>\n          <li><a href="#" class="button-pdf">PDF</a></li>\n          <li><a href="#" class="button-print">Print</a></li>\n        </ul>\n      </div>\n    </div>\n  '),
 
   // EVENT HANDLER DEFINITION

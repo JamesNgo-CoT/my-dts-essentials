@@ -159,9 +159,10 @@ var ODataDataTableView = Backbone.View.extend({
     return Promise.resolve();
   }
 }, {
-  columnSearchMap: {
+  columnSearchMaps: {
     dateEquals: function dateEquals(value, dataTableColumn, index) {
       var searchString = '';
+
       if (value) {
         if (value === 'NULL') {
           searchString = dataTableColumn.dataSrc() + ' eq null';
@@ -171,11 +172,13 @@ var ODataDataTableView = Backbone.View.extend({
           searchString = dataTableColumn.dataSrc() + ' eq ' + moment(value, 'l').format();
         }
       }
+
       return searchString;
     },
 
     numberEquals: function numberEquals(value, dataTableColumn, index) {
       var searchString = '';
+
       if (value) {
         if (value === 'NULL') {
           searchString = dataTableColumn.dataSrc() + ' eq null';
@@ -185,11 +188,13 @@ var ODataDataTableView = Backbone.View.extend({
           searchString = dataTableColumn.dataSrc() + ' eq ' + value;
         }
       }
+
       return searchString;
     },
 
     numberExpression: function numberExpression(value, dataTableColumn, index) {
       var searchString = '';
+
       value = $.trim(value);
       if (value) {
         if (value.indexOf('!=') === 0) {
@@ -249,11 +254,13 @@ var ODataDataTableView = Backbone.View.extend({
           }
         }
       }
+
       return searchString;
     },
 
     stringContains: function stringContains(value, dataTableColumn, index) {
       var searchString = '';
+
       if (value) {
         if (value === 'NULL') {
           searchString = dataTableColumn.dataSrc() + ' eq null';
@@ -263,11 +270,13 @@ var ODataDataTableView = Backbone.View.extend({
           searchString = 'contains(tolower(' + dataTableColumn.dataSrc() + '),\'' + value.toLowerCase() + '\')';
         }
       }
+
       return searchString;
     },
 
     stringEquals: function stringEquals(value, dataTableColumn, index) {
       var searchString = '';
+
       if (value) {
         if (value === 'NULL') {
           searchString = dataTableColumn.dataSrc() + ' eq null';
@@ -277,6 +286,7 @@ var ODataDataTableView = Backbone.View.extend({
           searchString = 'tolower(' + dataTableColumn.dataSrc() + ') eq \'' + value.toLowerCase() + '\'';
         }
       }
+
       return searchString;
     }
   }

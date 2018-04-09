@@ -4,6 +4,9 @@
 
 /* exported ODataCollection */
 var ODataCollection = Backbone.Collection.extend({
+
+  // PROPERTY DEFINITION
+
   $count: true,
 
   $filter: null,
@@ -13,6 +16,12 @@ var ODataCollection = Backbone.Collection.extend({
   count: null,
 
   data: null,
+
+  model: function model(attrs, options) {
+    return new ODataModel(attrs, options);
+  },
+
+  // METHOD DEFINITION
 
   fetch: function fetch() {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -48,10 +57,6 @@ var ODataCollection = Backbone.Collection.extend({
     options.processData = false;
 
     return Backbone.Collection.prototype.fetch.call(this, options);
-  },
-
-  model: function model(attrs, options) {
-    return new ODataModel(attrs, options);
   },
 
   parse: function parse(response, options) {

@@ -2,6 +2,9 @@
 
 /* exported ODataCollection */
 const ODataCollection = Backbone.Collection.extend({
+
+  // PROPERTY DEFINITION
+
   $count: true,
 
   $filter: null,
@@ -11,6 +14,10 @@ const ODataCollection = Backbone.Collection.extend({
   count: null,
 
   data: null,
+
+  model: (attrs, options) => new ODataModel(attrs, options),
+
+  // METHOD DEFINITION
 
   fetch: function(options = {}) {
     this.count = null;
@@ -45,8 +52,6 @@ const ODataCollection = Backbone.Collection.extend({
     
     return Backbone.Collection.prototype.fetch.call(this, options);
   },
-
-  model: (attrs, options) => new ODataModel(attrs, options),
 
   parse: function(response, options) {
     if (response['@odata.count']) {

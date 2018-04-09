@@ -1,18 +1,14 @@
 /* global _ Backbone CotForm */
 
 /* exported ODataFormView */
-/** Backbone View subclass to render an oData entity as an interactive form. */
 const ODataFormView = Backbone.View.extend({
 
   // PROPERTY DEFINITION
 
-  /** @type {Object[]} */
   sections: null,
 
-  /** @type {string|function} */
   rootPath: null,
 
-  /** @type {function} */
   template: _.template(`
     <div class="hidden-print">
       <a href="#" class="btn btn-default btn-cancel">Cancel</a>
@@ -29,11 +25,6 @@ const ODataFormView = Backbone.View.extend({
 
   // EVENT HANDLER DEFINITION
 
-  /**
-   * Handles "click on cancel button" event.
-   * @param  {Event} e
-   * @return {[boolean]} Returns false to prevent default behaviour.
-   */
   doCancel: function(e) {
 
     if (!confirm('Any changes made will not be saved. Do you want to continue?')) {
@@ -42,16 +33,11 @@ const ODataFormView = Backbone.View.extend({
     }
   },
 
-  /**
-   * Handles "click on save button" event.
-   * @param  {Event} e
-   */
   doSave: function(e) {
     e.preventDefault();
     this.$el.find('form').submit();
   },
 
-  /** Events */
   events: {
     'click .btn-cancel': 'doCancel',
     'click .btn-save': 'doSave'
@@ -59,11 +45,6 @@ const ODataFormView = Backbone.View.extend({
 
   // METHOD DEFINITION
 
-  /**
-   * Render method.
-   * @param  {[Object]} options
-   * @return {Promise}
-   */
   render: function(options = {}) {
     this.$el.html(this.template({ model: this.model.toJSON() }));
 

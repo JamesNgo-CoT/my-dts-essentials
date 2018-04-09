@@ -167,96 +167,132 @@ const ODataDataTableView = Backbone.View.extend({
     return Promise.resolve();
   }
 }, {
-  columnSearchMap: {
+  columnSearchMaps: {
     dateEquals: (value, dataTableColumn, index) => {
       let searchString = '';
+
       if (value) {
-        if (value === 'NULL') { searchString = dataTableColumn.dataSrc() + ' eq null'; }
-        else if (value === '!NULL') { searchString = dataTableColumn.dataSrc() + ' ne null'; }
-        else if (moment(value, 'l').isValid()) { searchString = dataTableColumn.dataSrc() + ' eq ' + moment(value, 'l').format(); }
+        if (value === 'NULL') {
+          searchString = `${dataTableColumn.dataSrc()} eq null`;
+        } else if (value === '!NULL') {
+          searchString = `${dataTableColumn.dataSrc()} ne null`;
+        } else if (moment(value, 'l').isValid()) {
+          searchString = `${dataTableColumn.dataSrc()} eq ${moment(value, 'l').format()}`;
+        }
       }
+
       return searchString;
     },
 
     numberEquals: (value, dataTableColumn, index) => {
       let searchString = '';
+
       if (value) {
-        if (value === 'NULL') { searchString = dataTableColumn.dataSrc() + ' eq null'; }
-        else if (value === '!NULL') { searchString = dataTableColumn.dataSrc() + ' ne null'; }
-        else if (isNaN(value)) { searchString = dataTableColumn.dataSrc() + ' eq ' + value; }
+        if (value === 'NULL') {
+          searchString = `${dataTableColumn.dataSrc()} eq null`;
+        } else if (value === '!NULL') {
+          searchString = `${dataTableColumn.dataSrc()} ne null`;
+        } else if (isNaN(value)) {
+          searchString = `${dataTableColumn.dataSrc()} eq ${value}`;
+        }
       }
+
       return searchString;
     },
 
     numberExpression: (value, dataTableColumn, index) => {
       let searchString = '';
+
       value = $.trim(value);
       if (value) {
         if (value.indexOf('!=') === 0) {
           value = $.trim(value.replace('!=', ''));
           if (value) {
             if (value === 'NULL') {
-              searchString = dataTableColumn.dataSrc() + ' ne null';
+              searchString = `${dataTableColumn.dataSrc()} ne null`;
             } else if (value === '!NULL') {
-                searchString = dataTableColumn.dataSrc() + ' eq null';
+                searchString = `${dataTableColumn.dataSrc()} eq null`;
             } else if (!isNaN(value)) {
-              searchString = dataTableColumn.dataSrc() + ' ne ' + value;
+              searchString = `${dataTableColumn.dataSrc()} ne ${value}`;
             }
           }
         } else if (value.indexOf('>=') === 0) {
           value = $.trim(value.replace('>=', ''));
-          if (value && !isNaN(value)) { searchString = dataTableColumn.dataSrc() + ' ge ' + value; }
+          if (value && !isNaN(value)) {
+            searchString = `${dataTableColumn.dataSrc()} ge ${value}`;
+          }
         } else if (value.indexOf('>') === 0) {
           value = $.trim(value.replace('>', ''));
-          if (value && !isNaN(value)) { searchString = dataTableColumn.dataSrc() + ' gt ' + value; }
+          if (value && !isNaN(value)) {
+            searchString = `${dataTableColumn.dataSrc()} gt ${value}`;
+          }
         } else if (value.indexOf('<=') === 0) {
           value = $.trim(value.replace('<=', ''));
-          if (value && !isNaN(value)) { searchString = dataTableColumn.dataSrc() + ' le ' + value; }
+          if (value && !isNaN(value)) {
+            searchString = `${dataTableColumn.dataSrc()} le ${value}`;
+          }
         } else if (value.indexOf('<') === 0) {
           value = $.trim(value.replace('<', ''));
-          if (value && !isNaN(value)) { searchString = dataTableColumn.dataSrc() + ' lt ' + value; }
+          if (value && !isNaN(value)) {
+            searchString = `${dataTableColumn.dataSrc()} lt ${value}`;
+          }
         } else if (value.indexOf('-') !== -1 || value.toLowerCase().indexOf('to') !== -1) {
           value = value.replace(/to/ig, '-');
           let values  = value.split('-').map((value) => $.trim(value));
           if (values[0] && !isNaN(values[0])) {
-            searchString = dataTableColumn.dataSrc() + ' ge ' + values[0];
+            searchString = `${dataTableColumn.dataSrc()} ge ${values[0]}`;
             if (values[1] && !isNaN(values[1]) && +values[1] >= +values[0]) {
-              searchString = searchString + ' and ' + dataTableColumn.dataSrc() + ' le ' + values[1];
+              searchString = `${searchString} and ${dataTableColumn.dataSrc()} le ${values[1]}`;
             }
           }
         } else {
-          if (value.indexOf('=') === 0) { value = $.trim(value.replace('=', '')); }
+          if (value.indexOf('=') === 0) {
+            value = $.trim(value.replace('=', ''));
+          }
           if (value) {
             if (value === 'NULL') {
-              searchString = dataTableColumn.dataSrc() + ' eq null';
+              searchString = `${dataTableColumn.dataSrc()} eq null`;
             } else if (value === '!NULL') {
-              searchString = dataTableColumn.dataSrc() + ' ne null';
+              searchString = `${dataTableColumn.dataSrc()} ne null`;
             } else if (!isNaN(value)) {
-              searchString = dataTableColumn.dataSrc() + ' eq ' + value;
+              searchString = `${dataTableColumn.dataSrc()} eq ${value}`;
             }
           }
         }
       }
+
       return searchString;
     },
 
     stringContains: (value, dataTableColumn, index) => {
       let searchString = '';
+
       if (value) {
-        if (value === 'NULL') { searchString = dataTableColumn.dataSrc() + ' eq null'; }
-        else if (value === '!NULL') { searchString = dataTableColumn.dataSrc() + ' ne null'; }
-        else { searchString = 'contains(tolower(' + dataTableColumn.dataSrc() + '),\'' + value.toLowerCase() + '\')'; }
+        if (value === 'NULL') {
+          searchString = `${dataTableColumn.dataSrc()} eq null`;
+        } else if (value === '!NULL') {
+          searchString = `${dataTableColumn.dataSrc()} ne null`;
+        } else {
+          searchString = `contains(tolower(${dataTableColumn.dataSrc()}),'${value.toLowerCase()}')`;
+        }
       }
+
       return searchString;
     },
 
     stringEquals: (value, dataTableColumn, index) => {
       let searchString = '';
+
       if (value) {
-        if (value === 'NULL') { searchString = dataTableColumn.dataSrc() + ' eq null'; }
-        else if (value === '!NULL') { searchString = dataTableColumn.dataSrc() + ' ne null'; }
-        else { searchString = 'tolower(' + dataTableColumn.dataSrc() + ') eq \'' + value.toLowerCase() + '\''; }
+        if (value === 'NULL') {
+          searchString = `${dataTableColumn.dataSrc()} eq null`;
+        } else if (value === '!NULL') {
+          searchString = `${dataTableColumn.dataSrc()} ne null`;
+        } else {
+          searchString = `tolower(${dataTableColumn.dataSrc()}) eq '${value.toLowerCase()}'`;
+        }
       }
+
       return searchString;
     }
   }

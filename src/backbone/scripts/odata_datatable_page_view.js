@@ -5,6 +5,8 @@ const ODataDataTablePageView = ODataDataTableView.extend({
 
   // PROPERTY DEFINITION
 
+  columns: null,
+
   template: _.template(`
     <div>
       <button type="button" class="btn btn-default btn-reload">Reload Data</button>
