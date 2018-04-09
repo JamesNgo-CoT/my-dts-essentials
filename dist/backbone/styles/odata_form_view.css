@@ -6,6 +6,8 @@
       background-color: transparent; }
       #maincontent .cot-form form .panel .panel-body .form-group {
         margin-bottom: 10px; }
+        #maincontent .cot-form form .panel .panel-body .form-group dl {
+          margin-bottom: 0; }
       #maincontent .cot-form form .panel .panel-body .grid-object {
         padding-bottom: 0;
         padding-top: 0; }
@@ -15,5 +17,3 @@
           margin: 0 0 10px 0; }
           #maincontent .cot-form form .panel .panel-body .grid-object table.grid-table td {
             background-color: transparent; }
-      #maincontent .cot-form form .panel .panel-body dl {
-        margin-bottom: 10px; }
