@@ -15,3 +15,5 @@
           margin: 0 0 10px 0; }
           #maincontent .cot-form form .panel .panel-body .grid-object table.grid-table td {
             background-color: transparent; }
+      #maincontent .cot-form form .panel .panel-body dl {
+        margin-bottom: 10px; }
