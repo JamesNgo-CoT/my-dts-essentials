@@ -12,7 +12,7 @@ var ODataCollection = Backbone.Collection.extend({
 
   count: null,
 
-  data: {},
+  data: null,
 
   fetch: function fetch() {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};

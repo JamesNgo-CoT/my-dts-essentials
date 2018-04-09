@@ -1,30 +1,22 @@
-/* global _ Backbone */
+/* global Backbone */
 
 /* exported ODataReportView */
+/** Backbone View subclass to render an oData entity as a read only report. */
 const ODataReportView = Backbone.View.extend({
+
+  // PROPERTY DEFINITION
+
+  /** @type {function} */
+  template: null,
+
+  // METHOD DEFINITION
+
+  /**
+   * Render method.
+   * @return {Promise}
+   */
   render: function() {
     this.$el.html(this.template({ model: this.model.toJSON() }));
     return Promise.resolve();
-  },
-
-  template: _.template(`
-    <div class="cot-report">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3>Section Title</h3>
-        </div>
-
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-xs-12">
-              <dl>
-                <dt>ID</dt>
-                <dl><%= model.id %></dl>
-              </dl>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  `)
+  }
 });

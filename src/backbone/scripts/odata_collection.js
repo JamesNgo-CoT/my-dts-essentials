@@ -10,7 +10,7 @@ const ODataCollection = Backbone.Collection.extend({
 
   count: null,
 
-  data: {},
+  data: null,
 
   fetch: function(options = {}) {
     this.count = null;

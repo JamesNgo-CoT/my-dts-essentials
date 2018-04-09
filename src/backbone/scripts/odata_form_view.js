@@ -1,36 +1,69 @@
 /* global _ Backbone CotForm */
 
 /* exported ODataFormView */
+/** Backbone View subclass to render an oData entity as an interactive form. */
 const ODataFormView = Backbone.View.extend({
+
+  // PROPERTY DEFINITION
+
+  /** @type {Object[]} */
+  sections: null,
+
+  /** @type {string|function} */
+  rootPath: null,
+
+  /** @type {function} */
+  template: _.template(`
+    <div class="hidden-print">
+      <a href="#" class="btn btn-default btn-cancel">Cancel</a>
+      <button type="button" class="btn btn-default btn-save">Save</button>
+    </div>
+
+    <div class="cot-form"></div>
+
+    <div class="hidden-print">
+      <a href="#" class="btn btn-default btn-cancel">Cancel</a>
+      <button type="button" class="btn btn-default btn-save">Save</button>
+    </div>
+  `),
+
+  // EVENT HANDLER DEFINITION
+
+  /**
+   * Handles "click on cancel button" event.
+   * @param  {Event} e
+   * @return {[boolean]} Returns false to prevent default behaviour.
+   */
   doCancel: function(e) {
+
     if (!confirm('Any changes made will not be saved. Do you want to continue?')) {
       e.preventDefault();
       return false;
     }
   },
 
+  /**
+   * Handles "click on save button" event.
+   * @param  {Event} e
+   */
   doSave: function(e) {
     e.preventDefault();
     this.$el.find('form').submit();
   },
 
+  /** Events */
   events: {
     'click .btn-cancel': 'doCancel',
     'click .btn-save': 'doSave'
   },
 
-  sections: [{
-    rows: [{
-      fields: [{
-        bindto: 'id',
-        id: 'id',
-        required: true,
-        title: 'ID',
-        type: 'text'
-      }]
-    }]
-  }],
+  // METHOD DEFINITION
 
+  /**
+   * Render method.
+   * @param  {[Object]} options
+   * @return {Promise}
+   */
   render: function(options = {}) {
     this.$el.html(this.template({ model: this.model.toJSON() }));
 
@@ -52,21 +85,5 @@ const ODataFormView = Backbone.View.extend({
     });
 
     return Promise.resolve();
-  },
-
-  rootPath: '/* @echo SRC_PATH *//',
-
-  template: _.template(`
-    <div class="hidden-print">
-      <a href="#" class="btn btn-default btn-cancel">Cancel</a>
-      <button type="button" class="btn btn-default btn-save">Save</button>
-    </div>
-
-    <div class="cot-form"></div>
-
-    <div class="hidden-print">
-      <a href="#" class="btn btn-default btn-cancel">Cancel</a>
-      <button type="button" class="btn btn-default btn-save">Save</button>
-    </div>
-  `)
+  }
 });
