@@ -17,5 +17,23 @@ var ODataModel = Backbone.Model.extend({
     }
 
     return base.replace(/\/$/, '') + '(\'' + encodeURIComponent(this.get(this.idAttribute)) + '\')';
+  },
+
+  // MODEL DEFINITION
+
+  parse: function parse(response, options) {
+    if (response.__CreatedOn) {
+      delete response.__CreatedOn;
+    }
+    if (response.__ModifiedOn) {
+      delete response.__ModifiedOn;
+    }
+    if (response.__Owner) {
+      delete response.__Owner;
+    }
+    if (response.__Status) {
+      delete response.__Status;
+    }
+    return Backbone.Model.prototype.parse.call(this, response);
   }
 });
