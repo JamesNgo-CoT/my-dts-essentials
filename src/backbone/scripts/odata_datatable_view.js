@@ -164,9 +164,7 @@ const ODataDataTableView = Backbone.View.extend({
       serverSide: true
     }, options);
 
-    // if (options.order) {
-    //   config.order = options.order;
-    // }
+    console.log('CONFIG', config);
 
     this.dataTable = this.$el.find('table').DataTable(config);
 
