@@ -104,6 +104,8 @@ const ODataDataTableView = Backbone.View.extend({
       options.columns = _.result(this, 'columns');
     }
 
+    console.log('OPTIONS COLUMNS', options.columns);
+
     options.collection = this.collection.toJSON();
     
     if (this.dataTable) {
@@ -111,6 +113,8 @@ const ODataDataTableView = Backbone.View.extend({
     }
 
     this.$el.html(this.template(options));
+
+    console.log('$EL', this.$el);
 
     this.dataTable = this.$el.find('table').DataTable({
       ajax: (data, callback, settings) => {
