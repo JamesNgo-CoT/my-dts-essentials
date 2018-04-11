@@ -96,6 +96,8 @@ const ODataDataTableView = Backbone.View.extend({
   },
 
   render: function(options = {}) {
+    console.log('ODATA DATATABLE VIEW RENDER');
+
     if (options.columns) {
       this.columns = _.result(options, 'columns');
     } else {
