@@ -108,6 +108,8 @@ var ODataDataTableView = Backbone.View.extend({
         // $count
         fetchData.$count = true;
 
+        console.log('FETCH DATA', fetchData);
+
         // $filter
         var $filter = data.columns.filter(function (value, index, array) {
           return value.searchable && value.search && value.search.value;
@@ -118,15 +120,21 @@ var ODataDataTableView = Backbone.View.extend({
           fetchData.$filter = $filter;
         }
 
+        console.log('FETCH DATA', fetchData);
+
         // $orderby
         fetchData.$orderby = data.order.map(function (value) {
           return data.columns[value.column].data + ' ' + value.dir;
         }).join(',');
 
+        console.log('FETCH DATA', fetchData);
+
         // $search
         if (data.search && data.search.value) {
           fetchData.$search = '"' + data.search.value + '"';
         }
+
+        console.log('FETCH DATA', fetchData);
 
         // $select
         var $select = settings.aoColumns.map(function (value) {
@@ -139,6 +147,8 @@ var ODataDataTableView = Backbone.View.extend({
         if ($select) {
           fetchData.$select = $select;
         }
+
+        console.log('FETCH DATA', fetchData);
 
         // $skip
         fetchData.$skip = data.start;
