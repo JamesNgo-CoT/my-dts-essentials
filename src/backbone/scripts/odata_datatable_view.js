@@ -154,6 +154,8 @@ const ODataDataTableView = Backbone.View.extend({
         // $top
         fetchData.$top = data.length;
 
+        console.log('FETCH DATA', fetchData);
+
         this.trigger('loadStart');
         this.collection.fetch({ data: fetchData }).then(() => {
           this.trigger('loadEnd');
