@@ -96,15 +96,11 @@ const ODataDataTableView = Backbone.View.extend({
   },
 
   render: function(options = {}) {
-    console.log('ODATA DATATABLE VIEW RENDER');
-
     if (options.columns) {
       this.columns = _.result(options, 'columns');
     } else {
       options.columns = _.result(this, 'columns');
     }
-
-    console.log('OPTIONS COLUMNS', options.columns);
 
     options.collection = this.collection.toJSON();
     
@@ -114,18 +110,12 @@ const ODataDataTableView = Backbone.View.extend({
 
     this.$el.html(this.template(options));
 
-    console.log('$EL', this.$el, this.$el.html());
-
-    console.log('COLUMNS', _.result(this, 'columns'));
-
     this.dataTable = this.$el.find('table').DataTable({
       ajax: (data, callback, settings) => {
         const fetchData = {};
 
         // $count
         fetchData.$count = true;
-
-        console.log('FETCH DATA', fetchData);
 
         // $filter
         const $filter = data.columns.filter((value, index, array) => value.searchable && value.search && value.search.value)
@@ -135,19 +125,13 @@ const ODataDataTableView = Backbone.View.extend({
           fetchData.$filter = $filter;
         }
 
-        console.log('FETCH DATA', fetchData);
-
         // $orderby
         fetchData.$orderby = data.order.map((value) => data.columns[value.column].data + ' ' + value.dir).join(',');
-
-        console.log('FETCH DATA', fetchData);
 
         // $search
         if (data.search && data.search.value) {
           fetchData.$search = '"' + data.search.value + '"';
         }
-
-        console.log('FETCH DATA', fetchData);
 
         // $select
         const $select = settings.aoColumns.map((value) => value.data)
@@ -158,15 +142,11 @@ const ODataDataTableView = Backbone.View.extend({
           fetchData.$select = $select;
         }
 
-        console.log('FETCH DATA', fetchData);
-
         // $skip
         fetchData.$skip = data.start;
 
         // $top
         fetchData.$top = data.length;
-
-        console.log('FETCH DATA', fetchData);
 
         this.trigger('loadStart');
         this.collection.fetch({ data: fetchData }).then(() => {
@@ -181,7 +161,7 @@ const ODataDataTableView = Backbone.View.extend({
       },
       columns: _.result(this, 'columns'),
       dom: `<'row'<'col-sm-6'l><'col-sm-6'f>><'row'<'col-sm-12'<'table-responsive'tr>>><'row'<'col-sm-5'i><'col-sm-7'p>>B`,
-      order: options.order || null,
+      order: options.order || [],
       serverSide: true
     });
 

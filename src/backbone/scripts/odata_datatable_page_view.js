@@ -88,16 +88,12 @@ const ODataDataTablePageView = ODataDataTableView.extend({
   // METHOD DEFINITION
 
   render: function(options = {}) {
-    console.log('ODATA DATATABLE PAGE VIEW RENDER');
-
     if (options.columns) {
       this.columns = _.result(options, 'columns');
     } else {
       options.columns = _.result(this, 'columns');
     }
     options.datatable = ODataDataTableView.prototype.template.call(this, options);
-
-    console.log('********', options);
 
     return ODataDataTableView.prototype.render.call(this, options);
   }
