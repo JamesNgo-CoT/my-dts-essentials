@@ -95,7 +95,7 @@ var ODataDataTableView = Backbone.View.extend({
 
     this.$el.html(this.template(options));
 
-    this.dataTable = this.$el.find('table').DataTable({
+    var config = {
       ajax: function ajax(data, callback, settings) {
         var fetchData = {};
 
@@ -153,9 +153,14 @@ var ODataDataTableView = Backbone.View.extend({
       },
       columns: _.result(this, 'columns'),
       dom: '<\'row\'<\'col-sm-6\'l><\'col-sm-6\'f>><\'row\'<\'col-sm-12\'<\'table-responsive\'tr>>><\'row\'<\'col-sm-5\'i><\'col-sm-7\'p>>B',
-      order: options.order || [],
       serverSide: true
-    });
+    };
+
+    if (options.order) {
+      config.order = options.order;
+    }
+
+    this.dataTable = this.$el.find('table').DataTable(config);
 
     return Promise.resolve();
   }
