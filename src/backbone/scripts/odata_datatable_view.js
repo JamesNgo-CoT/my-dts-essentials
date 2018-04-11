@@ -116,6 +116,8 @@ const ODataDataTableView = Backbone.View.extend({
 
     console.log('$EL', this.$el);
 
+    console.log('COLUMNS', _.result(this, 'columns'));
+
     this.dataTable = this.$el.find('table').DataTable({
       ajax: (data, callback, settings) => {
         const fetchData = {};
