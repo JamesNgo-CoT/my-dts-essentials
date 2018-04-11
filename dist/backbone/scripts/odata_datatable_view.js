@@ -99,7 +99,7 @@ var ODataDataTableView = Backbone.View.extend({
 
     this.$el.html(this.template(options));
 
-    console.log('$EL', this.$el);
+    console.log('$EL', this.$el, this.$el.html());
 
     console.log('COLUMNS', _.result(this, 'columns'));
 

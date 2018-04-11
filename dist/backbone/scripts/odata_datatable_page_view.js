@@ -67,7 +67,7 @@ var ODataDataTablePageView = ODataDataTableView.extend({
     }
     options.datatable = ODataDataTableView.prototype.template.call(this, options);
 
-    console.log('ODATA DATATABLE PAGE VIEW RENDER OPTIONS', options);
+    console.log('********', options);
 
     return ODataDataTableView.prototype.render.call(this, options);
   }
