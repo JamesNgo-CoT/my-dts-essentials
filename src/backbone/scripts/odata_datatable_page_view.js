@@ -97,6 +97,8 @@ const ODataDataTablePageView = ODataDataTableView.extend({
     }
     options.datatable = ODataDataTableView.prototype.template.call(this, options);
 
+    console.log('ODATA DATATABLE PAGE VIEW RENDER OPTIONS', options);
+
     return ODataDataTableView.prototype.render.call(this, options);
   }
 });
