@@ -7,8 +7,6 @@ const LoginModel = Backbone.Model.extend({
 
   cotLogin: null,
 
-  modal: null,
-
   // METHOD DEFINITION
 
   checkLogin: function(options = {}) {
@@ -27,28 +25,24 @@ const LoginModel = Backbone.Model.extend({
     });
   },
 
-  logout() {
-    this.cotLogin.logout();
-  },
-
   requireLogin(options) {
     return Promise.resolve().then(() => {
       return this.checkLogin(options);
     }).catch(() => {
       return this.showLogin(options);
     }).catch(() => {
-      this.logout();
+      this.cotLogin.logout();
       return Promise.reject();
     });
   },
 
   showLogin(options = {}) {
-    if (this.modal) {
-      this.modal.modal('hide');
+    if (this.cotModel.modal) {
+      this.cotModel.modal.modal('hide');
     }
 
     return new Promise((resolve, reject) => {
-      this.modal = cot_app.showModal({
+      this.cotModel.modal = cot_app.showModal({
         title: 'User Login',
         body: `
           ${this.options.loginMessage}
@@ -70,10 +64,10 @@ const LoginModel = Backbone.Model.extend({
         originatingElement: options.$originatingElement || $(this.cotLogin.options['welcomeSelector']).find('a.login'),
         className: 'cot-login-modal',
         onShown: () => {
-          this.modal.find('.btn-cot-login').click(() => {
+          this.cotModel.modal.find('.btn-cot-login').click(() => {
             this.cotLogin._login();
           });
-          this.modal.find('.modal-body input').keydown((e) => {
+          this.cotModel.modal.find('.modal-body input').keydown((e) => {
             if ((e.charCode || e.keyCode || 0) === 13) {
               this.cotLogin._login();
             }
