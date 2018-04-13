@@ -28,7 +28,7 @@ const LoginView = Backbone.View.extend({
   },
 
   doLogout: function() {
-    this.model.logout();
+    this.model.cotLogin.logout();
   },
 
   events: {
