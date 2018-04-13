@@ -45,7 +45,7 @@ const LoginModel = Backbone.Model.extend({
       this.cotLogin.modal = cot_app.showModal({
         title: 'User Login',
         body: `
-          ${this.options.loginMessage}
+          ${this.cotLogin.options.loginMessage}
           <form>
             <div class="form-group">
               <label for="cot_login_username">Username</label>:

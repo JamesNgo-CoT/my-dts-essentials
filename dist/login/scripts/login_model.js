@@ -55,7 +55,7 @@ var LoginModel = Backbone.Model.extend({
     return new Promise(function (resolve, reject) {
       _this3.cotLogin.modal = cot_app.showModal({
         title: 'User Login',
-        body: '\n          ' + _this3.options.loginMessage + '\n          <form>\n            <div class="form-group">\n              <label for="cot_login_username">Username</label>:\n              <input class="form-control" id="cot_login_username">\n            </div>\n            <div class="form-group">\n              <label for="cot_login_password">Password</label>:\n              <input class="form-control" type="password" id="cot_login_password">\n            </div>\n          </form>\n        ',
+        body: '\n          ' + _this3.cotLogin.options.loginMessage + '\n          <form>\n            <div class="form-group">\n              <label for="cot_login_username">Username</label>:\n              <input class="form-control" id="cot_login_username">\n            </div>\n            <div class="form-group">\n              <label for="cot_login_password">Password</label>:\n              <input class="form-control" type="password" id="cot_login_password">\n            </div>\n          </form>\n        ',
         footerButtonsHtml: '\n          <button class="btn btn-success" type="button" data-dismiss="modal">Cancel</button>\n          <button class="btn btn-success btn-cot-login" type="button">Login</button>\n        ',
         originatingElement: options.$originatingElement || $(_this3.cotLogin.options['welcomeSelector']).find('a.login'),
         className: 'cot-login-modal',
