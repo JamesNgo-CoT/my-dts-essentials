@@ -2,32 +2,8 @@
 
 /* exported LoginView */
 const LoginView = Backbone.View.extend({
-  cotLogin: null,
 
-  doLogin: function() {
-    _.result(this, 'cotLogin').showLogin({ $originatingElement: this.$el.find('button') }).then(() => {
-      Backbone.history.stop();
-      Backbone.history.start()
-    });
-  },
-
-  doLogout: function() {
-    _.result(this, 'cotLogin').logout();
-  },
-
-  events: {
-    'click .btn-login': 'doLogin',
-    'click .btn-logout': 'doLogout'
-  },
-
-  initialize: function(options = {}) {
-    this.listenTo(this.model, 'change', this.render);
-  },
-
-  render: function() {
-    this.$el.html(this.template({ model: this.model.toJSON() }));
-    return Promise.resolve();
-  },
+  // PROPERTY DEFINITION
 
   tagName: 'form',
 
@@ -40,5 +16,36 @@ const LoginView = Backbone.View.extend({
     <% } else { %>
     <button type="button" class="btn btn-default btn-logout">Logout</button>
     <% } %>
-  `)
+  `),
+
+  // EVENT HANDLER DEFINITION
+
+  doLogin: function() {
+    this.model.showLogin({ $originatingElement: this.$el.find('button') }).then(() => {
+      Backbone.history.stop();
+      Backbone.history.start()
+    });
+  },
+
+  doLogout: function() {
+    this.model.logout();
+  },
+
+  events: {
+    'click .btn-login': 'doLogin',
+    'click .btn-logout': 'doLogout'
+  },
+
+  // METHOD DEFINITION
+
+  render: function() {
+    this.$el.html(this.template({ model: this.model.toJSON() }));
+    return Promise.resolve();
+  },
+
+  // INITIALIZER DEFINITION
+
+  initialize: function(options = {}) {
+    this.listenTo(this.model, 'change', this.render);
+  },
 });
