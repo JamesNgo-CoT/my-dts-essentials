@@ -156,8 +156,6 @@ var ODataDataTableView = Backbone.View.extend({
       serverSide: true
     }, options);
 
-    console.log('CONFIG', config);
-
     this.dataTable = this.$el.find('table').DataTable(config);
 
     return Promise.resolve();
