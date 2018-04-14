@@ -87,6 +87,14 @@ const LoginView = Backbone.View.extend({
           const onLogin = () => {
             this.$modal.find('.btn').prop('disabled', true);
 
+            const displayLoginError = (error) => {
+              $('<div class="alert alert-danger" role="alert">' + error + '</div>')
+                .prependTo(this.$modal.find('.modal-body'))
+                .fadeOut(5000, function() {
+                  $(this).remove();
+                });
+            }
+
             const username = this.$modal.find('#cot_login_username').val();
             const password = this.$modal.find('#cot_login_password').val();
             if (username && password) {
@@ -94,14 +102,6 @@ const LoginView = Backbone.View.extend({
                 this.$modal.modal('hide');
                 this.$modal.find('.btn').prop('disabled', false);
               }, (error) => {
-                const displayLoginError = (error) => {
-                  $('<div class="alert alert-danger" role="alert">' + error + '</div>')
-                    .prependTo(this.$modal.find('.modal-body'))
-                    .fadeOut(5000, function() {
-                      $(this).remove();
-                    });
-                }
-
                 if (error === 'invalid_user_or_pwd') {
                   displayLoginError('Invalid username or password.');
                 } else {
@@ -110,6 +110,7 @@ const LoginView = Backbone.View.extend({
                 this.$modal.find('.btn').prop('disabled', false);
               });
             } else {
+              displayLoginError('Missing username or password.');
               this.$modal.find('.btn').prop('disabled', false);
             }
           }
