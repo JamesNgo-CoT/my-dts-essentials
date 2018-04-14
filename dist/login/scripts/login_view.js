@@ -14,7 +14,7 @@ var LoginView = Backbone.View.extend({
   // EVENT HANDLER DEFINITION
 
   doLogin: function doLogin() {
-    this.model.showLogin({ $originatingElement: this.$el.find('button') }).then(function () {
+    this.showLogin({ $originatingElement: this.$el.find('button') }).then(function () {
       Backbone.history.stop();
       Backbone.history.start();
     });
