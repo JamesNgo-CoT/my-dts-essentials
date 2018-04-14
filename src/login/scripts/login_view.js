@@ -84,19 +84,19 @@ const LoginView = Backbone.View.extend({
         originatingElement: options.$originatingElement || $(this.model.cotLogin.options['welcomeSelector']).find('a.login'),
         className: 'cot-login-modal',
         onShown: () => {
-          function onLogin() {
+          const onLogin = () => {
             this.$modal.find('.btn').prop('disabled', true);
 
-            const username = this.modal.find('#cot_login_username').val();
-            const password = this.modal.find('#cot_login_password').val();
+            const username = this.$modal.find('#cot_login_username').val();
+            const password = this.$modal.find('#cot_login_password').val();
             if (username && password) {
-              this.modal.login(username, password).then(() => {
+              this.model.login(username, password).then(() => {
                 this.$modal.modal('hide');
                 this.$modal.find('.btn').prop('disabled', false);
               }, (error) => {
-                function displayLoginError(error) {
+                const displayLoginError = (error) => {
                   $('<div class="alert alert-danger" role="alert">' + error + '</div>')
-                    .prependTo(this.modal.find('.modal-body'))
+                    .prependTo(this.$modal.find('.modal-body'))
                     .fadeOut(5000, function() {
                       $(this).remove();
                     });
@@ -113,10 +113,10 @@ const LoginView = Backbone.View.extend({
               this.$modal.find('.btn').prop('disabled', false);
             }
           }
-          this.model.cotLogin.modal.find('.btn-cot-login').click(() => {
+          this.$modal.find('.btn-cot-login').click(() => {
             onLogin();
           });
-          this.model.cotLogin.modal.find('.modal-body input').keydown((e) => {
+          this.$modal.find('.modal-body input').keydown((e) => {
             if ((e.charCode || e.keyCode || 0) === 13) {
               onLogin();
             }

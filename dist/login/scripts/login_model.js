@@ -34,14 +34,15 @@ var LoginModel = Backbone.Model.extend({
   login: function login(username, password) {
     var _this2 = this;
 
-    return Promise(function (resolve, reject) {
-      _this2.cotLogin.login({
+    return new Promise(function (resolve, reject) {
+      _this2.cotLogin.session.login({
         error: function error(jqXHR, textStatus, _error) {
           reject(_error);
         },
         username: username,
         password: password,
         success: function success() {
+          _this2.cotLogin._setUserName();
           resolve();
         }
       });

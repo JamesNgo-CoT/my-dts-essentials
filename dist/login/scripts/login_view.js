@@ -69,39 +69,37 @@ var LoginView = Backbone.View.extend({
         originatingElement: options.$originatingElement || $(_this2.model.cotLogin.options['welcomeSelector']).find('a.login'),
         className: 'cot-login-modal',
         onShown: function onShown() {
-          function onLogin() {
-            var _this3 = this;
+          var onLogin = function onLogin() {
+            _this2.$modal.find('.btn').prop('disabled', true);
 
-            this.$modal.find('.btn').prop('disabled', true);
-
-            var username = this.modal.find('#cot_login_username').val();
-            var password = this.modal.find('#cot_login_password').val();
+            var username = _this2.$modal.find('#cot_login_username').val();
+            var password = _this2.$modal.find('#cot_login_password').val();
             if (username && password) {
-              this.modal.login(username, password).then(function () {
-                _this3.$modal.modal('hide');
-                _this3.$modal.find('.btn').prop('disabled', false);
+              _this2.model.login(username, password).then(function () {
+                _this2.$modal.modal('hide');
+                _this2.$modal.find('.btn').prop('disabled', false);
               }, function (error) {
-                function displayLoginError(error) {
-                  $('<div class="alert alert-danger" role="alert">' + error + '</div>').prependTo(this.modal.find('.modal-body')).fadeOut(5000, function () {
+                var displayLoginError = function displayLoginError(error) {
+                  $('<div class="alert alert-danger" role="alert">' + error + '</div>').prependTo(_this2.$modal.find('.modal-body')).fadeOut(5000, function () {
                     $(this).remove();
                   });
-                }
+                };
 
                 if (error === 'invalid_user_or_pwd') {
                   displayLoginError('Invalid username or password.');
                 } else {
                   displayLoginError('Unable to log in. Please try again.');
                 }
-                _this3.$modal.find('.btn').prop('disabled', false);
+                _this2.$modal.find('.btn').prop('disabled', false);
               });
             } else {
-              this.$modal.find('.btn').prop('disabled', false);
+              _this2.$modal.find('.btn').prop('disabled', false);
             }
-          }
-          _this2.model.cotLogin.modal.find('.btn-cot-login').click(function () {
+          };
+          _this2.$modal.find('.btn-cot-login').click(function () {
             onLogin();
           });
-          _this2.model.cotLogin.modal.find('.modal-body input').keydown(function (e) {
+          _this2.$modal.find('.modal-body input').keydown(function (e) {
             if ((e.charCode || e.keyCode || 0) === 13) {
               onLogin();
             }

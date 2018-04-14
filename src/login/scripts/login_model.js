@@ -26,12 +26,17 @@ const LoginModel = Backbone.Model.extend({
   },
 
   login: function(username, password) {
-    return Promise((resolve, reject) => {
-      this.cotLogin.login({
-        error: (jqXHR, textStatus, error) => { reject(error); },
+    return new Promise((resolve, reject) => {
+      this.cotLogin.session.login({
+        error: (jqXHR, textStatus, error) => {
+          reject(error);
+        },
         username: username,
         password: password,
-        success: () => { resolve(); }
+        success: () => {
+          this.cotLogin._setUserName();
+          resolve();
+        }
       });
     })
   },
