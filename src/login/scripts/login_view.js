@@ -5,6 +5,8 @@ const LoginView = Backbone.View.extend({
 
   // PROPERTY DEFINITION
 
+  $modal: null,
+
   tagName: 'form',
 
   template: _.template(`
@@ -55,12 +57,12 @@ const LoginView = Backbone.View.extend({
   },
 
   showLogin(options = {}) {
-    if (this.model.cotLogin.modal) {
-      this.model.cotLogin.modal.modal('hide');
+    if (this.$modal) {
+      this.$modal.modal('hide');
     }
 
     return new Promise((resolve, reject) => {
-      this.model.cotLogin.modal = cot_app.showModal({
+      this.$modal = cot_app.showModal({
         title: 'User Login',
         body: `
           ${this.model.cotLogin.options.loginMessage}
@@ -83,7 +85,33 @@ const LoginView = Backbone.View.extend({
         className: 'cot-login-modal',
         onShown: () => {
           function onLogin() {
-            this.model.cotLogin._login();
+            this.$modal.find('.btn').prop('disabled', true);
+
+            const username = this.modal.find('#cot_login_username').val();
+            const password = this.modal.find('#cot_login_password').val();
+            if (username && password) {
+              this.modal.login(username, password).then(() => {
+                this.$modal.modal('hide');
+                this.$modal.find('.btn').prop('disabled', false);
+              }, (error) => {
+                function displayLoginError(error) {
+                  $('<div class="alert alert-danger" role="alert">' + error + '</div>')
+                    .prependTo(this.modal.find('.modal-body'))
+                    .fadeOut(5000, function() {
+                      $(this).remove();
+                    });
+                }
+
+                if (error === 'invalid_user_or_pwd') {
+                  displayLoginError('Invalid username or password.');
+                } else {
+                  displayLoginError('Unable to log in. Please try again.');
+                }
+                this.$modal.find('.btn').prop('disabled', false);
+              });
+            } else {
+              this.$modal.find('.btn').prop('disabled', false);
+            }
           }
           this.model.cotLogin.modal.find('.btn-cot-login').click(() => {
             onLogin();

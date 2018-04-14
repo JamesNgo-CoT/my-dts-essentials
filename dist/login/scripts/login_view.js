@@ -7,6 +7,8 @@ var LoginView = Backbone.View.extend({
 
   // PROPERTY DEFINITION
 
+  $modal: null,
+
   tagName: 'form',
 
   template: _.template('\n    <span class="visible-print-inline">Logged in as</span>\n    <%= model.lastName || \'\' %><%= model.lastName && model.firstName  ? \',\' : \'\' %>\n    <%= model.firstName || \'\' %>\n    <% if (model.sid == null) { %>\n    <button type="button" class="btn btn-primary btn-login">Login</button>\n    <% } else { %>\n    <button type="button" class="btn btn-default btn-logout">Logout</button>\n    <% } %>\n  '),
@@ -55,12 +57,12 @@ var LoginView = Backbone.View.extend({
 
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    if (this.model.cotLogin.modal) {
-      this.model.cotLogin.modal.modal('hide');
+    if (this.$modal) {
+      this.$modal.modal('hide');
     }
 
     return new Promise(function (resolve, reject) {
-      _this2.model.cotLogin.modal = cot_app.showModal({
+      _this2.$modal = cot_app.showModal({
         title: 'User Login',
         body: '\n          ' + _this2.model.cotLogin.options.loginMessage + '\n          <form>\n            <div class="form-group">\n              <label for="cot_login_username">Username</label>:\n              <input class="form-control" id="cot_login_username">\n            </div>\n            <div class="form-group">\n              <label for="cot_login_password">Password</label>:\n              <input class="form-control" type="password" id="cot_login_password">\n            </div>\n          </form>\n        ',
         footerButtonsHtml: '\n          <button class="btn btn-success" type="button" data-dismiss="modal">Cancel</button>\n          <button class="btn btn-success btn-cot-login" type="button">Login</button>\n        ',
@@ -68,7 +70,33 @@ var LoginView = Backbone.View.extend({
         className: 'cot-login-modal',
         onShown: function onShown() {
           function onLogin() {
-            this.model.cotLogin._login();
+            var _this3 = this;
+
+            this.$modal.find('.btn').prop('disabled', true);
+
+            var username = this.modal.find('#cot_login_username').val();
+            var password = this.modal.find('#cot_login_password').val();
+            if (username && password) {
+              this.modal.login(username, password).then(function () {
+                _this3.$modal.modal('hide');
+                _this3.$modal.find('.btn').prop('disabled', false);
+              }, function (error) {
+                function displayLoginError(error) {
+                  $('<div class="alert alert-danger" role="alert">' + error + '</div>').prependTo(this.modal.find('.modal-body')).fadeOut(5000, function () {
+                    $(this).remove();
+                  });
+                }
+
+                if (error === 'invalid_user_or_pwd') {
+                  displayLoginError('Invalid username or password.');
+                } else {
+                  displayLoginError('Unable to log in. Please try again.');
+                }
+                _this3.$modal.find('.btn').prop('disabled', false);
+              });
+            } else {
+              this.$modal.find('.btn').prop('disabled', false);
+            }
           }
           _this2.model.cotLogin.modal.find('.btn-cot-login').click(function () {
             onLogin();
