@@ -1,4 +1,4 @@
-/* global Backbone cot_app cot_login CotSession */
+/* global Backbone cot_login CotSession */
 
 /* exported LoginModel */
 const LoginModel = Backbone.Model.extend({
@@ -25,63 +25,19 @@ const LoginModel = Backbone.Model.extend({
     });
   },
 
-  requireLogin(options) {
-    return Promise.resolve().then(() => {
-      return this.checkLogin(options);
-    }).catch(() => {
-      return this.showLogin(options);
-    }).catch(() => {
-      this.cotLogin.logout();
-      return Promise.reject();
-    });
+  login: function(username, password) {
+    return Promise((resolve, reject) => {
+      this.cotLogin.login({
+        error: (jqXHR, textStatus, error) => { reject(error); },
+        username: username,
+        password: password,
+        success: () => { resolve(); }
+      });
+    })
   },
 
-  showLogin(options = {}) {
-    if (this.cotLogin.modal) {
-      this.cotLogin.modal.modal('hide');
-    }
-
-    return new Promise((resolve, reject) => {
-      this.cotLogin.modal = cot_app.showModal({
-        title: 'User Login',
-        body: `
-          ${this.cotLogin.options.loginMessage}
-          <form>
-            <div class="form-group">
-              <label for="cot_login_username">Username</label>:
-              <input class="form-control" id="cot_login_username">
-            </div>
-            <div class="form-group">
-              <label for="cot_login_password">Password</label>:
-              <input class="form-control" type="password" id="cot_login_password">
-            </div>
-          </form>
-        `,
-        footerButtonsHtml: `
-          <button class="btn btn-success" type="button" data-dismiss="modal">Cancel</button>
-          <button class="btn btn-success btn-cot-login" type="button">Login</button>
-        `,
-        originatingElement: options.$originatingElement || $(this.cotLogin.options['welcomeSelector']).find('a.login'),
-        className: 'cot-login-modal',
-        onShown: () => {
-          this.cotLogin.modal.find('.btn-cot-login').click(() => {
-            this.cotLogin._login();
-          });
-          this.cotLogin.modal.find('.modal-body input').keydown((e) => {
-            if ((e.charCode || e.keyCode || 0) === 13) {
-              this.cotLogin._login();
-            }
-          });
-        },
-        onHidden: () => {
-          this.checkLogin(options).then(() => {
-            resolve();
-          }, () => {
-            reject();
-          });
-        }
-      });
-    });
+  logout: function() {
+    this.cotLogin.logout();
   },
 
   // CONSTRUCTOR DEFINITION

@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-/* global Backbone cot_app cot_login CotSession */
+/* global Backbone cot_login CotSession */
 
 /* exported LoginModel */
 var LoginModel = Backbone.Model.extend({
@@ -31,64 +31,35 @@ var LoginModel = Backbone.Model.extend({
     });
   },
 
-  requireLogin: function requireLogin(options) {
+  login: function login(username, password) {
     var _this2 = this;
 
-    return Promise.resolve().then(function () {
-      return _this2.checkLogin(options);
-    }).catch(function () {
-      return _this2.showLogin(options);
-    }).catch(function () {
-      _this2.cotLogin.logout();
-      return Promise.reject();
-    });
-  },
-  showLogin: function showLogin() {
-    var _this3 = this;
-
-    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-    if (this.cotLogin.modal) {
-      this.cotLogin.modal.modal('hide');
-    }
-
-    return new Promise(function (resolve, reject) {
-      _this3.cotLogin.modal = cot_app.showModal({
-        title: 'User Login',
-        body: '\n          ' + _this3.cotLogin.options.loginMessage + '\n          <form>\n            <div class="form-group">\n              <label for="cot_login_username">Username</label>:\n              <input class="form-control" id="cot_login_username">\n            </div>\n            <div class="form-group">\n              <label for="cot_login_password">Password</label>:\n              <input class="form-control" type="password" id="cot_login_password">\n            </div>\n          </form>\n        ',
-        footerButtonsHtml: '\n          <button class="btn btn-success" type="button" data-dismiss="modal">Cancel</button>\n          <button class="btn btn-success btn-cot-login" type="button">Login</button>\n        ',
-        originatingElement: options.$originatingElement || $(_this3.cotLogin.options['welcomeSelector']).find('a.login'),
-        className: 'cot-login-modal',
-        onShown: function onShown() {
-          _this3.cotLogin.modal.find('.btn-cot-login').click(function () {
-            _this3.cotLogin._login();
-          });
-          _this3.cotLogin.modal.find('.modal-body input').keydown(function (e) {
-            if ((e.charCode || e.keyCode || 0) === 13) {
-              _this3.cotLogin._login();
-            }
-          });
+    return Promise(function (resolve, reject) {
+      _this2.cotLogin.login({
+        error: function error(jqXHR, textStatus, _error) {
+          reject(_error);
         },
-        onHidden: function onHidden() {
-          _this3.checkLogin(options).then(function () {
-            resolve();
-          }, function () {
-            reject();
-          });
+        username: username,
+        password: password,
+        success: function success() {
+          resolve();
         }
       });
     });
   },
 
+  logout: function logout() {
+    this.cotLogin.logout();
+  },
 
   // CONSTRUCTOR DEFINITION
 
   initialize: function initialize(attributes, options) {
-    var _this4 = this;
+    var _this3 = this;
 
     this.cotLogin = new cot_login($.extend(options, {
       onLogin: function onLogin(cotLogin) {
-        _this4.set(cotLogin);
+        _this3.set(cotLogin);
       }
     }));
   }

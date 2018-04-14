@@ -1,4 +1,4 @@
-/* global _ Backbone */
+/* global _ Backbone cot_app */
 
 /* exported LoginView */
 const LoginView = Backbone.View.extend({
@@ -38,9 +38,71 @@ const LoginView = Backbone.View.extend({
 
   // METHOD DEFINITION
 
+  requireLogin(options) {
+    return Promise.resolve().then(() => {
+      return this.model.checkLogin(options);
+    }).catch(() => {
+      return this.showLogin(options);
+    }).catch(() => {
+      this.model.logout();
+      return Promise.reject();
+    });
+  },
+
   render: function() {
     this.$el.html(this.template({ model: this.model.toJSON() }));
     return Promise.resolve();
+  },
+
+  showLogin(options = {}) {
+    if (this.model.cotLogin.modal) {
+      this.model.cotLogin.modal.modal('hide');
+    }
+
+    return new Promise((resolve, reject) => {
+      this.model.cotLogin.modal = cot_app.showModal({
+        title: 'User Login',
+        body: `
+          ${this.model.cotLogin.options.loginMessage}
+          <form>
+            <div class="form-group">
+              <label for="cot_login_username">Username</label>:
+              <input class="form-control" id="cot_login_username">
+            </div>
+            <div class="form-group">
+              <label for="cot_login_password">Password</label>:
+              <input class="form-control" type="password" id="cot_login_password">
+            </div>
+          </form>
+        `,
+        footerButtonsHtml: `
+          <button class="btn btn-success" type="button" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-success btn-cot-login" type="button">Login</button>
+        `,
+        originatingElement: options.$originatingElement || $(this.model.cotLogin.options['welcomeSelector']).find('a.login'),
+        className: 'cot-login-modal',
+        onShown: () => {
+          function onLogin() {
+            this.model.cotLogin._login();
+          }
+          this.model.cotLogin.modal.find('.btn-cot-login').click(() => {
+            onLogin();
+          });
+          this.model.cotLogin.modal.find('.modal-body input').keydown((e) => {
+            if ((e.charCode || e.keyCode || 0) === 13) {
+              onLogin();
+            }
+          });
+        },
+        onHidden: () => {
+          this.model.checkLogin(options).then(() => {
+            resolve();
+          }, () => {
+            reject();
+          });
+        }
+      });
+    });
   },
 
   // INITIALIZER DEFINITION
