@@ -17,7 +17,7 @@ CotSession.prototype.isLoggedIn = function(serverCheckCallback) {
       if (url.indexOf('/cc_sr_admin_v1/session') !== -1) {
         url = `${url}/${sid}`;
       } else if (url.indexOf('/c3api_auth/auth') !== -1) {
-        url = `${url}('${sid}')`;
+        url = `${url}/${sid}`;
       } else if (url.indexOf('/c3api_auth/v2/AuthService.svc/AuthSet') !== -1) {
         url = `${url}('${sid}')`;
       }
@@ -66,8 +66,8 @@ CotSession.prototype.login = function(options) {
     ajaxSettings.url = `${ajaxSettings.url}?app=${payload.app}`;
     ajaxSettings.data = payload;
   } else if (ajaxSettings.url.indexOf('/c3api_auth/auth') !== -1) {
-    ajaxSettings.contentType = 'application/json';
-    ajaxSettings.data = JSON.stringify(payload);
+    ajaxSettings.url = `${ajaxSettings.url}?app=${payload.app}`;
+    ajaxSettings.data = payload;
   } else if (ajaxSettings.url.indexOf('/c3api_auth/v2/AuthService.svc/AuthSet') !== -1) {
     ajaxSettings.contentType = 'application/json';
     ajaxSettings.data = JSON.stringify(payload);
