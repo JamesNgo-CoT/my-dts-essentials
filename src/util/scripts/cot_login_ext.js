@@ -64,7 +64,6 @@ CotSession.prototype.login = function(options) {
     ajaxSettings.contentType = 'application/json';
     ajaxSettings.data = JSON.stringify(payload);
   } else {
-    // ajaxSettings.url = `${ajaxSettings.url}?app=${payload.app}`;
     ajaxSettings.data = payload;
   }
 
