@@ -18,12 +18,10 @@ CotSession.prototype.isLoggedIn = function (serverCheckCallback) {
       serverCheckCallback(CotSession.LOGIN_CHECK_RESULT_FALSE);
     } else {
       var url = '' + this.options.ccApiOrigin + this.options.ccApiPath + this.options.ccApiEndpoint;
-      if (url.indexOf('/cc_sr_admin_v1/session') !== -1) {
-        url = url + '/' + sid;
-      } else if (url.indexOf('/c3api_auth/auth') !== -1) {
-        url = url + '/' + sid;
-      } else if (url.indexOf('/c3api_auth/v2/AuthService.svc/AuthSet') !== -1) {
+      if (url.indexOf('/c3api_auth/v2/AuthService.svc/AuthSet') !== -1) {
         url = url + '(\'' + sid + '\')';
+      } else {
+        url = url + '/' + sid;
       }
 
       $.get(url).done(function (data) {
@@ -68,15 +66,12 @@ CotSession.prototype.login = function (options) {
     url: '' + this.options.ccApiOrigin + this.options.ccApiPath + this.options.ccApiEndpoint
   };
 
-  if (ajaxSettings.url.indexOf('/cc_sr_admin_v1/session') !== -1) {
-    ajaxSettings.url = ajaxSettings.url + '?app=' + payload.app;
-    ajaxSettings.data = payload;
-  } else if (ajaxSettings.url.indexOf('/c3api_auth/auth') !== -1) {
-    ajaxSettings.url = ajaxSettings.url + '?app=' + payload.app;
-    ajaxSettings.data = payload;
-  } else if (ajaxSettings.url.indexOf('/c3api_auth/v2/AuthService.svc/AuthSet') !== -1) {
+  if (ajaxSettings.url.indexOf('/c3api_auth/v2/AuthService.svc/AuthSet') !== -1) {
     ajaxSettings.contentType = 'application/json';
     ajaxSettings.data = JSON.stringify(payload);
+  } else {
+    // ajaxSettings.url = `${ajaxSettings.url}?app=${payload.app}`;
+    ajaxSettings.data = payload;
   }
 
   $.ajax(ajaxSettings).done(function (data) {
