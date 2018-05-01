@@ -14,7 +14,14 @@ CotSession.prototype.isLoggedIn = function(serverCheckCallback) {
       serverCheckCallback(CotSession.LOGIN_CHECK_RESULT_FALSE);
     } else {
       let url = `${this.options.ccApiOrigin}${this.options.ccApiPath}${this.options.ccApiEndpoint}`;
-      url = `${url}${url.indexOf('/cc_sr_admin_v1/session') === -1 ? '(\'' + sid + '\')' : '/' + sid}`;
+      if (url.indexOf('/cc_sr_admin_v1/session') !== -1) {
+        url = `${url}/${sid}`;
+      } else if (url.indexOf('/c3api_auth/auth') !== -1) {
+        url = `${url}('${sid}')`;
+      } else if (url.indexOf('/c3api_auth/v2/AuthService.svc/AuthSet') !== -1) {
+        url = `${url}('${sid}')`;
+      }
+
       $.get(url)
         .done((data) => {
           const app = data['app'] || '', rsid = data['sid'] || '', error = data['error'] || '';
@@ -44,15 +51,27 @@ CotSession.prototype.login = function(options) {
     always: function() {}
   }, options);
 
-  const payload = { app: this.options.appName, user: options.username, pwd: options.password };
+  const payload = {
+    app: this.options.appName,
+    user: options.username,
+    pwd: options.password
+  };
 
-  let url = `${this.options.ccApiOrigin}${this.options.ccApiPath}${this.options.ccApiEndpoint}`;
-  url = `${url}${url.indexOf('/cc_sr_admin_v1/session') === -1 ? '' : '?app=' + this.options.appName}`;
+  const ajaxSettings = {
+    method: 'POST',
+    url: `${this.options.ccApiOrigin}${this.options.ccApiPath}${this.options.ccApiEndpoint}`
+  };
 
-  const ajaxSettings = url.indexOf('/cc_sr_admin_v1/session') !== -1
-    ? { data: payload, method: 'POST' }
-    : { contentType: 'application/json', data: JSON.stringify(payload), method: 'POST' };
-  ajaxSettings.url = url;
+  if (ajaxSettings.url.indexOf('/cc_sr_admin_v1/session') !== -1) {
+    ajaxSettings.url = `${ajaxSettings.url}?app=${payload.app}`;
+    ajaxSettings.data = payload;
+  } else if (ajaxSettings.url.indexOf('/c3api_auth/auth') !== -1) {
+    ajaxSettings.contentType = 'application/json';
+    ajaxSettings.data = JSON.stringify(payload);
+  } else if (ajaxSettings.url.indexOf('/c3api_auth/v2/AuthService.svc/AuthSet') !== -1) {
+    ajaxSettings.contentType = 'application/json';
+    ajaxSettings.data = JSON.stringify(payload);
+  }
 
   $.ajax(ajaxSettings)
     .done((data) => {
