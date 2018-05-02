@@ -25,9 +25,11 @@ var ODataModel = Backbone.Model.extend({
     var json = Backbone.Model.prototype.toJSON.call(this, options);
 
     if (!options.includeMetaData) {
-      delete json.__CreatedOn;
-      delete json.__ModifiedOn;
-      delete json.__Owner;
+      delete json['@odata.context'];
+      delete json['@odata.etag'];
+      delete json['__CreatedOn'];
+      delete json['__ModifiedOn'];
+      delete json['__Owner'];
     }
 
     return json;
