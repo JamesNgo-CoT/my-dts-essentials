@@ -33,7 +33,7 @@ const ODataModel = Backbone.Model.extend({
     return Backbone.Model.prototype.parse.call(this, response);
   },
 
-  toJSON: function(options) {
+  toJSON: function(options = {}) {
     console.log('**********');
     console.log('TO JSON');
     const json = Backbone.Model.prototype.toJSON.call(this, options);

@@ -35,7 +35,9 @@ var ODataModel = Backbone.Model.extend({
     return Backbone.Model.prototype.parse.call(this, response);
   },
 
-  toJSON: function toJSON(options) {
+  toJSON: function toJSON() {
+    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
     console.log('**********');
     console.log('TO JSON');
     var json = Backbone.Model.prototype.toJSON.call(this, options);
