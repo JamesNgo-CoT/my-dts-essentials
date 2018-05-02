@@ -36,12 +36,15 @@ var ODataModel = Backbone.Model.extend({
   },
 
   toJSON: function toJSON(options) {
+    console.log('**********');
     console.log('TO JSON');
     var json = Backbone.Model.prototype.toJSON.call(this, options);
 
     if (!options.returnAll) {
       delete json.note;
     }
+
+    console.log(json);
 
     return json;
   }
