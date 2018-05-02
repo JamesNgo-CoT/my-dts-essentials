@@ -17,33 +17,14 @@ const ODataModel = Backbone.Model.extend({
 
   // MODEL DEFINITION
 
-  parse: function(response, options) {
-    if (response.__CreatedOn) {
-      delete response.__CreatedOn;
-    }
-    if (response.__ModifiedOn) {
-      delete response.__ModifiedOn;
-    }
-    if (response.__Owner) {
-      delete response.__Owner;
-    }
-    if (response.__Status) {
-      delete response.__Status;
-    }
-    return Backbone.Model.prototype.parse.call(this, response);
-  },
-
   toJSON: function(options = {}) {
-    console.log('**********');
-    console.log('OPTIONS', options);
-    console.log('TO JSON');
     const json = Backbone.Model.prototype.toJSON.call(this, options);
 
-    if (!options.returnAll) {
-      delete json.note;
+    if (!options.includeMetaData) {
+        delete json.__CreatedOn;
+        delete json.__ModifiedOn;
+        delete json.__Owner;
     }
-
-    console.log(json);
 
     return json;
   }
