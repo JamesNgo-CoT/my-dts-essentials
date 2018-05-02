@@ -31,5 +31,10 @@ const ODataModel = Backbone.Model.extend({
       delete response.__Status;
     }
     return Backbone.Model.prototype.parse.call(this, response);
+  },
+
+  toJSON: function(options) {
+    console.log('TO JSON');
+    return Backbone.Model.prototype.toJSON.call(this, options);
   }
 });
