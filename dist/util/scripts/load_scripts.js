@@ -1,7 +1,5 @@
 "use strict";
 
-/* global Promise */
-
 var loadScript = function () {
   var loaded = {};
   return function (url) {

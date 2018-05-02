@@ -1,4 +1,3 @@
-/* global Promise */
 
 const loadScript = (() => {
   const loaded = {};
