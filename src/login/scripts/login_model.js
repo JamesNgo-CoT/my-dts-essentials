@@ -1,4 +1,4 @@
-/* global Backbone cot_login CotSession */
+/* global cot_login CotSession */
 
 /* exported LoginModel */
 const LoginModel = Backbone.Model.extend({

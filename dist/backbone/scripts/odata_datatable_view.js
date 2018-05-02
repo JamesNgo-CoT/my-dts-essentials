@@ -1,6 +1,6 @@
 'use strict';
 
-/* global _ Backbone moment */
+/* global moment */
 
 /* exported ODataDataTableView */
 var ODataDataTableView = Backbone.View.extend({

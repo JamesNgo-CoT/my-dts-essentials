@@ -1,4 +1,4 @@
-/* global _ Backbone moment */
+/* global moment */
 
 /* exported ODataDataTableView */
 const ODataDataTableView = Backbone.View.extend({

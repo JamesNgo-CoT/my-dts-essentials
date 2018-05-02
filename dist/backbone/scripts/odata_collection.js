@@ -1,6 +1,6 @@
 'use strict';
 
-/* global _ Backbone ODataModel */
+/* global ODataModel */
 
 /* exported ODataCollection */
 var ODataCollection = Backbone.Collection.extend({

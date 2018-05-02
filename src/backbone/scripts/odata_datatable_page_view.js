@@ -1,4 +1,4 @@
-/* global _ ODataDataTableView */
+/* global ODataDataTableView */
 
 /* exported ODataDataTablePageView */
 const ODataDataTablePageView = ODataDataTableView.extend({

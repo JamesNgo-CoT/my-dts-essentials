@@ -1,4 +1,3 @@
-/* global _ Backbone */
 
 /* exported ODataModel */
 const ODataModel = Backbone.Model.extend({

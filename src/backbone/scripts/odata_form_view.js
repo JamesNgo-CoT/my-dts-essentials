@@ -1,4 +1,4 @@
-/* global _ Backbone CotForm */
+/* global CotForm */
 
 /* exported ODataFormView */
 const ODataFormView = Backbone.View.extend({

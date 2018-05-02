@@ -1,6 +1,6 @@
 'use strict';
 
-/* global _ ODataDataTableView */
+/* global ODataDataTableView */
 
 /* exported ODataDataTablePageView */
 var ODataDataTablePageView = ODataDataTableView.extend({

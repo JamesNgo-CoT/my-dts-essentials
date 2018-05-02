@@ -1,6 +1,6 @@
 "use strict";
 
-/* global Backbone cot_login CotSession */
+/* global cot_login CotSession */
 
 /* exported LoginModel */
 var LoginModel = Backbone.Model.extend({

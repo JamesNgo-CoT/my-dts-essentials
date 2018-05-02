@@ -1,4 +1,4 @@
-/* global _ Backbone cot_app */
+/* global cot_app */
 
 /* exported LoginView */
 const LoginView = Backbone.View.extend({

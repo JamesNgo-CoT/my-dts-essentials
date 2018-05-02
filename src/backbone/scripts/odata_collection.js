@@ -1,4 +1,4 @@
-/* global _ Backbone ODataModel */
+/* global ODataModel */
 
 /* exported ODataCollection */
 const ODataCollection = Backbone.Collection.extend({

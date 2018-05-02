@@ -1,7 +1,5 @@
-/* global Backbone */
 
 /* exported ODataReportView */
-/** Backbone View subclass to render an oData entity as a read only report. */
 const ODataReportView = Backbone.View.extend({
 
   // PROPERTY DEFINITION

@@ -1,6 +1,6 @@
 'use strict';
 
-/* global _ Backbone cot_app */
+/* global cot_app */
 
 /* exported LoginView */
 var LoginView = Backbone.View.extend({

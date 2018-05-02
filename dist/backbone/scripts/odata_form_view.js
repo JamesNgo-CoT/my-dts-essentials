@@ -1,6 +1,6 @@
 'use strict';
 
-/* global _ Backbone CotForm */
+/* global CotForm */
 
 /* exported ODataFormView */
 var ODataFormView = Backbone.View.extend({
