@@ -5,7 +5,10 @@
     "jquery": true
   },
   "extends": "eslint:recommended",
-  "globals": {},
+  "globals": {
+    "_": true,
+    "Backbone": true
+  },
   "parserOptions": {
     "ecmaVersion": 6
   },
