@@ -1,5 +1,3 @@
-
-/* exported loadStyle */
 const loadStyle = (() => {
   const loaded = {};
   return (url) => {

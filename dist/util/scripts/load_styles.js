@@ -1,6 +1,5 @@
 'use strict';
 
-/* exported loadStyle */
 var loadStyle = function () {
   var loaded = {};
   return function (url) {
