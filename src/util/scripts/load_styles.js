@@ -1,8 +1,10 @@
+
+/* exported loadStyle */
 const loadStyle = (() => {
   const loaded = {};
   return (url) => {
     if (!loaded[url]) {
-      $('head').append($('<link href="' + url + '" rel="stylesheet" type="text/css">'));
+      $('head').append($(`<link href="${url}" rel="stylesheet" type="text/css">`));
       loaded[url] = true;
     }
   }
