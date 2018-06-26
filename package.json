@@ -1,7 +1,7 @@
 {
-  "name": "my-dts-workspace-2018",
+  "name": "my-dts-essentials",
   "description": "Description...",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "gulpfile.babel.js",
   "directories": {
     "test": "test"
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JamesNgo-CoT/my-dts-workspace-2018.git"
+    "url": "git+https://github.com/JamesNgo-CoT/my-dts-essentials.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JamesNgo-CoT/my-dts-workspace-2018/issues"
+    "url": "https://github.com/JamesNgo-CoT/my-dts-essentials/issues"
   },
-  "homepage": "https://github.com/JamesNgo-CoT/my-dts-workspace-2018#readme",
+  "homepage": "https://github.com/JamesNgo-CoT/my-dts-essentials#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
