@@ -10,8 +10,7 @@
 		"backbone": true
 	},
 	"parserOptions": {
-		"ecmaVersion": 6,
-		"sourceType": "module"
+		"ecmaVersion": 6
 	},
 	"rules": {
 		"no-console": "warn"

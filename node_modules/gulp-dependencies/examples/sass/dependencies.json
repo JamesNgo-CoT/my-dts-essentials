@@ -1,6 +1,0 @@
-{
-    "base.scss": [
-        "_reset.scss"
-    ],
-    "_reset.scss": []
-}
