@@ -13,6 +13,5 @@ indent_style = tab
 tab_width = 5
 
 [{package.json, package-lock.json}]
-
 indent_style = space
 indent_size = 2
